@@ -1,31 +1,22 @@
 fileFormatVersion: 2
-guid: 870d2b9d704419a44b4b89ae49aacea6
+guid: 1fbaa1109f75a8c4e9d47564203324e9
 TextureImporter:
   internalIDToNameTable:
   - first:
       213: 21300000
-    second: Wizard_walk_0
+    second: Wizard_cast_0
   - first:
       213: 21300002
-    second: Wizard_walk_1
+    second: Wizard_cast_1
   - first:
       213: 21300004
-    second: Wizard_walk_2
+    second: Wizard_cast_2
   - first:
       213: 21300006
-    second: Wizard_walk_3
+    second: Wizard_cast_3
   - first:
       213: 21300008
-    second: Wizard_walk_4
-  - first:
-      213: 21300010
-    second: Wizard_walk_5
-  - first:
-      213: 21300012
-    second: Wizard_walk_6
-  - first:
-      213: 21300014
-    second: Wizard_walk_7
+    second: Wizard_cast_4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -70,7 +61,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -99,11 +90,35 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 256
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 256
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Wizard_walk_0
+      name: Wizard_cast_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,7 +139,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wizard_walk_1
+      name: Wizard_cast_1
       rect:
         serializedVersion: 2
         x: 32
@@ -145,7 +160,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wizard_walk_2
+      name: Wizard_cast_2
       rect:
         serializedVersion: 2
         x: 64
@@ -166,7 +181,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wizard_walk_3
+      name: Wizard_cast_3
       rect:
         serializedVersion: 2
         x: 96
@@ -187,7 +202,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wizard_walk_4
+      name: Wizard_cast_4
       rect:
         serializedVersion: 2
         x: 128
@@ -203,69 +218,6 @@ TextureImporter:
       bones: []
       spriteID: 82305410000000000800000000000000
       internalID: 21300008
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Wizard_walk_5
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 0
-        width: 32
-        height: 32
-      alignment: 7
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a2305410000000000800000000000000
-      internalID: 21300010
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Wizard_walk_6
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 32
-        height: 32
-      alignment: 7
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c2305410000000000800000000000000
-      internalID: 21300012
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Wizard_walk_7
-      rect:
-        serializedVersion: 2
-        x: 224
-        y: 0
-        width: 32
-        height: 32
-      alignment: 7
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e2305410000000000800000000000000
-      internalID: 21300014
       vertices: []
       indices: 
       edges: []

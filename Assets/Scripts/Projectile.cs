@@ -38,10 +38,7 @@ public class Projectile : MonoBehaviour {
 			wizard.OnProjectileHit(hit);
 		}
 
-		var tilemap = other.GetComponent<TilemapCollider2D>();
-		if (tilemap) {
-			Debug.Log("Tilemap!");
-		}
+		hit.ignoreCollision = other.CompareTag("Barrier") || other.CompareTag("NavPoint") || other.GetComponent<Projectile>();
 
 		if (!hit.ignoreCollision) {
 			StartCoroutine(StopProjectile());

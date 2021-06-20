@@ -43,10 +43,6 @@ public class Player : MonoBehaviour {
 		UpdateMovement();
 	}
 
-	void LateUpdate() {
-		Animate();
-	}
-
 	void ProcessInput() {
 		if (!isDashing) {
 			var moveX = Input.GetAxisRaw("Horizontal");
@@ -84,10 +80,6 @@ public class Player : MonoBehaviour {
 
 		var diff = rigidBody.velocity.Delta(targetVelocity, vars.playerSpeed);
 		rigidBody.velocity += diff;
-	}
-
-	void Animate() {
-		animator.SetFloat("Speed", rigidBody.velocity.sqrMagnitude);
 	}
 
 	void Dash() {

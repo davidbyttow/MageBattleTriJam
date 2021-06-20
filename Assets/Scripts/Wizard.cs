@@ -10,7 +10,8 @@ public class Wizard : MonoBehaviour {
 	private Rigidbody2D rigidBody;
 	private Animator animator;
 	private bool isFacingRight;
-	internal bool isDead;
+	public bool isDead { get { return health <= 0; } }
+	internal bool ignoreProjectiles;
 
 	void Awake() {
 		animator = GetComponent<Animator>();
@@ -38,8 +39,14 @@ public class Wizard : MonoBehaviour {
 
 
 	public void OnProjectileHit(ProjectileHit hit) {
+		if (ignoreProjectiles) {
+			hit.ignoreCollision = true;
+			return;
+		}
 		if (!isDead) {
 			TakeDamage(hit.projectile.damage);
+		} else {
+			hit.ignoreCollision = true;
 		}
 	}
 
@@ -55,14 +62,13 @@ public class Wizard : MonoBehaviour {
 
 	public void TakeDamage(int damage) {
 		health -= damage;
-		Debug.Log($"HEALTH {health}");
 		if (health <= 0) {
 			Die();
 		}
 	}
 
 	public void Die() {
-		isDead = true;
+		health = 0;
 		animator.SetTrigger("Die");
 		rigidBody.isKinematic = true;
 	}

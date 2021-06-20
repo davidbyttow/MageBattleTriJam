@@ -72,17 +72,25 @@ public class Player : MonoBehaviour {
 		var vars = GameManager.inst.variables;
 
 		Vector2 targetVelocity;
-		if (isDashing) {
-			targetVelocity = dashDirection * vars.playerSpeed * 3;
+
+		if (wizard.isDead) {
+			targetVelocity = Vector2.zero;
 		} else {
-			targetVelocity = movementDirection * vars.playerSpeed;
+			if (isDashing) {
+				targetVelocity = dashDirection * vars.playerSpeed * 3;
+			} else {
+				targetVelocity = movementDirection * vars.playerSpeed;
+			}
 		}
 
-		var diff = rigidBody.velocity.Delta(targetVelocity, vars.playerSpeed);
-		rigidBody.velocity += diff;
+		if (!wizard.isDead) {
+			var diff = rigidBody.velocity.Delta(targetVelocity, vars.playerSpeed);
+			rigidBody.velocity += diff;
+		}
 	}
 
 	void Dash() {
+		wizard.ignoreProjectiles = true;
 		StartCoroutine(DashAsync());
 	}
 
@@ -95,6 +103,7 @@ public class Player : MonoBehaviour {
 
 		yield return new WaitForSeconds(0.2f);
 
+		wizard.ignoreProjectiles = false;
 		dashDirection = Vector2.zero;
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class GameManager : MonoBehaviour {
@@ -8,6 +9,7 @@ public class GameManager : MonoBehaviour {
 	public Wizard boss;
 	public RectTransform playerHealthBar;
 	public RectTransform bossHealthBar;
+	public Text respawnCounter;
 
 	private float playerBarWidth;
 	private float bossBarWidth;
@@ -25,6 +27,7 @@ public class GameManager : MonoBehaviour {
 	private void Update() {
 		UpdateHealthBar(playerHealthBar, playerBarWidth * (player.health / 100.0f));
 		UpdateHealthBar(bossHealthBar, bossBarWidth * (boss.health / 100.0f));
+		respawnCounter.text = $"{boss.GetComponent<Boss>().respawnCount + 1}";
 	}
 
 	private void UpdateHealthBar(RectTransform r, float width) {

@@ -34,11 +34,10 @@ public class Projectile : MonoBehaviour {
 
 		var wizard = other.GetComponent<Wizard>();
 		if (wizard) {
-			Debug.Log("Wizard!");
 			wizard.OnProjectileHit(hit);
 		}
 
-		hit.ignoreCollision = other.CompareTag("Barrier") || other.CompareTag("NavPoint") || other.GetComponent<Projectile>();
+		hit.ignoreCollision |= other.CompareTag("Barrier") || other.CompareTag("NavPoint") || other.GetComponent<Projectile>();
 
 		if (!hit.ignoreCollision) {
 			StartCoroutine(StopProjectile());

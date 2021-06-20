@@ -16,13 +16,16 @@ public class Boss : MonoBehaviour {
 
 	private Wizard wizard;
 	private Rigidbody2D rigidBody;
-	private Vector2 movementDirection = Vector2.zero;
+	private Animator animator;
 	private int nextNavPoint = 0;
 	private bool moving;
+	private bool respawning;
+	internal int respawnCount = 0;
 
 	void Awake() {
 		rigidBody = GetComponent<Rigidbody2D>();
 		wizard = GetComponent<Wizard>();
+		animator = GetComponent<Animator>();
 		wizard.SetFacing(false);
 	}
 
@@ -35,6 +38,9 @@ public class Boss : MonoBehaviour {
 		if (dead) {
 			moving = false;
 			rigidBody.velocity = Vector2.zero;
+			if (!respawning) {
+				StartCoroutine(StartRespawn());
+			}
 		} else if (!moving) {
 			GotoNextNavPoint();
 		}
@@ -60,18 +66,42 @@ public class Boss : MonoBehaviour {
 		rigidBody.velocity += diff;
 	}
 
+	IEnumerator StartRespawn() {
+		respawning = true;
+		yield return new WaitForSeconds(2.5f);
+		animator.SetTrigger("Respawn");
+		yield return new WaitForSeconds(0.2f);
+
+		Respawn();
+		animator.ResetTrigger("Respawn");
+
+		respawning = false;
+	}
+
+	void Respawn() {
+		respawnCount++;
+		wizard.health = 100;
+		animator.SetTrigger("Respawn");
+		rigidBody.isKinematic = false;
+		StartCoroutine(FireWhenReady());
+	}
+
 	Vector3 GetNavTarget() {
 		return navPoints[nextNavPoint].transform.position;
 	}
 
 	void GotoNextNavPoint() {
 		moving = true;
-		nextNavPoint = (nextNavPoint + 1) % navPoints.Length;
+		nextNavPoint = Random.Range(0, navPoints.Length - 1);
+//		nextNavPoint = (nextNavPoint + 1) % navPoints.Length;
 		//StartCoroutine(FireWhenReady());
 	}
 
 	IEnumerator FireWhenReady() {
-		yield return new WaitForSeconds(3.0f);
+		var startFireTime = 1.5f;
+		var t = (1f - (respawnCount / 10.0f));
+		var maxTime = Mathf.Clamp(t * startFireTime, 0, startFireTime);
+		yield return new WaitForSeconds(maxTime + Random.Range(-0.3f, 0.3f));
 		if (wizard.isDead) {
 			yield return null;
 		} else {
@@ -82,6 +112,9 @@ public class Boss : MonoBehaviour {
 
 	void FireMagicMissile() {
 		var toTarget = Player.inst.transform.position - transform.position;
-		wizard.FireProjectile(magicMissile, toTarget.normalized);
+		var missile = wizard.FireProjectile(magicMissile, toTarget.normalized);
+		var scale = Mathf.Lerp(0.3f, 3f, Mathf.Clamp(respawnCount / 10.0f, 0f, 1f));
+		Debug.Log(scale);
+		missile.transform.localScale = new Vector3(scale, scale, 0);
 	}
 }
